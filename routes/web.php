@@ -14,6 +14,7 @@ use App\Http\Controllers\Restu_Menu;
 use App\Http\Controllers\Invoice;
 use App\Http\Controllers\Admin_Order;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Admin_Booking;
 
 
 /*
@@ -67,6 +68,10 @@ Route::get('/orders',[Admin_Order::class,'home']);
 Route::get('/delete_orders{del}',[Admin_Order::class,'delete_order']);
 });
 
+Route::middleware('auth')->group(function () {
+Route::get('/admin_booking',[Admin_Booking::class,'home']);
+});
+
 Route::get('/',[Restu_Home_Controller::class,'index']);
 Route::get('/menu',[Restu_Menu::class,'menu_view']);
 
@@ -79,5 +84,6 @@ Route::post('/placeOrder',[PlaceOrder::class,'place_order_program']);
 
 Route::get('/booking',[BookingController::class,'home']);
 Route::post('/add_booking',[BookingController::class,'add_booking']);
+
 
 

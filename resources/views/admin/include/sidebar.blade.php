@@ -25,6 +25,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-shopping-bag"></i></div>
                                 Orders
                             </a>
+                            <a class="nav-link" href="{{url('/admin_booking')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Bookings
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
