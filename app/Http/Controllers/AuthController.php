@@ -9,10 +9,16 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     public function login(){
+        if (Auth::check()) {
+            return redirect('/home');
+        }
         return view('login');
     }
 
     public function register(){
+        if (Auth::check()) {
+            return redirect('/home');
+        }
         return view('register');
     }
 
@@ -31,6 +37,7 @@ class AuthController extends Controller
        ];
 
        if (Auth::attempt($credentials)){
+        $request->session()->put('user_mail',$credentials['email']);
         return redirect('/home')->with('Success','Loged in');
        }
 

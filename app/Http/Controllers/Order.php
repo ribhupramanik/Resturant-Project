@@ -12,7 +12,6 @@ class Order extends Controller
         $cartContent = Cart::content();
         $data['cartContent'] = $cartContent;
         $all_data = DB::table('tables')->where('Status','=','Unreserved')->get();
-        // dd($cartContent);
         return view('restu.orders',$data)->with(['allInfo'=>$all_data]);
     }
 
@@ -86,7 +85,12 @@ class Order extends Controller
 
     public function deleteItem(Request $request){
         
-        Cart::remove($request->rowId);
+        $rowId = $request->input('rowId');
+        // Logic to remove the item from the cart
+        if (Cart::remove($rowId)) {
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false]);
         
     }
 }
