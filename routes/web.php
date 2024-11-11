@@ -13,6 +13,7 @@ use App\Http\Controllers\Restu_Home_Controller;
 use App\Http\Controllers\Restu_Menu;
 use App\Http\Controllers\Invoice;
 use App\Http\Controllers\Admin_Order;
+use App\Http\Controllers\BookingController;
 
 
 /*
@@ -61,6 +62,11 @@ Route::post('/edit_fooditems_program',[FoodItems::class,'edit_fooditems_program'
 Route::get('/delete_fooditems{del}',[FoodItems::class,'delete_fooditems']);
 });
 
+Route::middleware('auth')->group(function () {
+Route::get('/orders',[Admin_Order::class,'home']);
+Route::get('/delete_orders{del}',[Admin_Order::class,'delete_order']);
+});
+
 Route::get('/',[Restu_Home_Controller::class,'index']);
 Route::get('/menu',[Restu_Menu::class,'menu_view']);
 
@@ -71,7 +77,7 @@ Route::post('/delete-cart-item',[Order::class,'deleteItem']);
 
 Route::post('/placeOrder',[PlaceOrder::class,'place_order_program']);
 
-Route::get('/invoic{ep}',[Invoice::class,'home']);
+Route::get('/booking',[BookingController::class,'home']);
+Route::post('/add_booking',[BookingController::class,'add_booking']);
 
-Route::get('/orders',[Admin_Order::class,'home']);
-Route::get('/delete_orders{del}',[Admin_Order::class,'delete_order']);
+
