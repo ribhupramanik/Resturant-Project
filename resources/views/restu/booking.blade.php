@@ -107,7 +107,10 @@
             var time = $("#time").val();
             var people = $("#people").val();
             var message = $("#message").val();
-            
+            if (!name || !email || !time || !people) {
+            alert("Please fill all fields.");
+            return;
+            }
             $.ajax({
                 url: '{{url("/add_booking")}}',
                 method: 'POST',

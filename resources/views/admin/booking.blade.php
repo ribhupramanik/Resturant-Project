@@ -24,9 +24,9 @@
                        <td>{{$all->time}}</td>
                        <td>{{$all->people}}</td>
                        <td>{{$all->message}}</td>
-                       <!-- <td><a href="{{url('/edit_booking')}}{{$all->id}}"><button type="button" class="btn btn-success">Edit</button></a>
+                       <td><a href="{{url('/edit_booking')}}{{$all->id}}"><button type="button" class="btn btn-success">Edit</button></a>
                             <a href="{{url('/delete_booking')}}{{$all->id}}"><button type="button" class="btn btn-danger">Delete</button></a>
-                        </td> -->
+                        </td>
                     </tr>
                     @endforeach
             </table>

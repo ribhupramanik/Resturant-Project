@@ -70,6 +70,9 @@ Route::get('/delete_orders{del}',[Admin_Order::class,'delete_order']);
 
 Route::middleware('auth')->group(function () {
 Route::get('/admin_booking',[Admin_Booking::class,'home']);
+Route::get('/edit_booking{ep}',[Admin_Booking::class,'edit_booking_page']);
+Route::post('/edit_booking_program',[Admin_Booking::class,'edit_booking_program']);
+Route::get('/delete_booking{del}',[Admin_Booking::class,'delete_booking']);
 });
 
 Route::get('/',[Restu_Home_Controller::class,'index']);

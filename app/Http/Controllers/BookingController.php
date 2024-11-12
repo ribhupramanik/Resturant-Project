@@ -15,7 +15,7 @@ class BookingController extends Controller
         $name = $request->input('name');
         $email = $request->input("email");
         $time = $request->input("time");
-        $people = $request->input("time");
+        $people = $request->input("people");
         $message = $request->input("message");
         $data = [
             'name'      => $name,
