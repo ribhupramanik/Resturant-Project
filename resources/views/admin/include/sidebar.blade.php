@@ -33,7 +33,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        {{Session('user_mail')}}
                     </div>
                 </nav>
                 </div>
