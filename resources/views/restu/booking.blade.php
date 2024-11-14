@@ -69,6 +69,16 @@
                                         <label for="message">Special Request</label>
                                     </div>
                                 </div>
+                                <div class="form-group mt-2">
+                                    <div class="form-floating">
+                                        <select id="table_number" class="form-select col-md-1">
+                                            @foreach ($allInfo->all() as $all)
+                                            <option value="{{$all->TableNumber}}">{{$all->TableNumber}}</option>
+                                            @endforeach
+                                        </select>
+                                        <label for="table_number">Table Number</label>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3 submit" type="button">Book Now</button>
                                 </div>
@@ -107,6 +117,7 @@
             var time = $("#time").val();
             var people = $("#people").val();
             var message = $("#message").val();
+            var table_number =$('#table_number').val();
             if (!name || !email || !time || !people) {
             alert("Please fill all fields.");
             return;
@@ -120,7 +131,8 @@
                     email: email,
                     time: time,
                     people: people,
-                    message: message
+                    message: message,
+                    table_number: table_number,
                 },
                 success: function(response) {
                     if (response.success) {

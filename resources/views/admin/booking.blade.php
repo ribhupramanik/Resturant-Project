@@ -14,6 +14,7 @@
                     <td>Time</td>
                     <td>People</td>
                     <td>Message</td>
+                    <td>Table</td>
                     <td>Actions</td>
                 </tr>
                 @foreach ($allInfo->all() as $all)
@@ -24,6 +25,7 @@
                        <td>{{$all->time}}</td>
                        <td>{{$all->people}}</td>
                        <td>{{$all->message}}</td>
+                       <td>{{$all->table_number}}</td>
                        <td><a href="{{url('/edit_booking')}}{{$all->id}}"><button type="button" class="btn btn-success">Edit</button></a>
                             <a href="{{url('/delete_booking')}}{{$all->id}}"><button type="button" class="btn btn-danger">Delete</button></a>
                         </td>
