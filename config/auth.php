@@ -18,6 +18,11 @@ return [
         'passwords' => 'users',
     ],
 
+    
+
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -36,11 +41,21 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+    // Default guard (web) if you don't define any other guards
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
     ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+    // Add the 'client' guard
+        'client' => [
+            'driver' => 'session',
+            'provider' => 'clients',  // Will point to the clients provider
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------
@@ -60,16 +75,19 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+    // Default provider for users
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class,
     ],
+
+    // Add the 'clients' provider for the client guard
+    'clients' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Client::class, // Your Client model
+],
+
+],
 
     /*
     |--------------------------------------------------------------------------

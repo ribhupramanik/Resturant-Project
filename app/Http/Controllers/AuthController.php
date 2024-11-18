@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     public function login(){
-        if (Auth::check()) {
+        if (Auth::guard('admin')->check()) {
             return redirect('/home');
         }
         return view('login');
     }
 
     public function register(){
-        if (Auth::check()) {
+        if (Auth::guard('admin')->check()) {
             return redirect('/home');
         }
         return view('register');
@@ -36,8 +36,8 @@ class AuthController extends Controller
         'password' => $request->pass,
        ];
 
-       if (Auth::attempt($credentials)){
-        $request->session()->put('user_mail',$credentials['email']);
+       if (Auth::guard('admin')->attempt($credentials)){
+        $request->session()->put('admin_mail',$credentials['email']);
         return redirect('/home')->with('Success','Loged in');
        }
 
@@ -45,8 +45,11 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request) {
-       $request->session()->flush();
-       return redirect('/');
+        if (Auth::guard('admin')->check()) {
+            Auth::guard('admin')->logout(); // Logout the admin
+            $request->session()->forget('admin_mail');
+            return redirect('/');
       }
+    }
 
 }

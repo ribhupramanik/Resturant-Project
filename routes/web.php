@@ -15,6 +15,7 @@ use App\Http\Controllers\Invoice;
 use App\Http\Controllers\Admin_Order;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Admin_Booking;
+use App\Http\Controllers\Login_user;
 
 
 /*
@@ -36,7 +37,7 @@ Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
 Route::get('/logout',[AuthController::class,'logout']);
 Route::get('/home',[HomeController::class,'index']);
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:admin')->group(function () {
 Route::get('/tables',[Tables::class,'home']);
 Route::get('/add_tables',action:[Tables::class,('add_tables_page')]);
 Route::post('/add_tables',action:[Tables::class,('add_tables_form')]);
@@ -45,7 +46,7 @@ Route::post('/edit_tables_program',[Tables::class,('edit_tables_program')]);
 Route::get('/delete_table{del}',[Tables::class,('delete_table')]);
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:admin')->group(function () {
 Route::get('/catagories',[Catagories::class,'home']);
 Route::get('/add_catagory',action:[Catagories::class,('add_catagory_page')]);
 Route::post('/add_catagory',[Catagories::class,('add_catagory_form')]);
@@ -54,7 +55,7 @@ Route::post('/edit_catagory_program',[Catagories::class,'edit_catagory_program']
 Route::get('/delete_catagory{del}',[Catagories::class,('delete_catagory')]);
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:admin')->group(function () {
 Route::get('/fooditems',[FoodItems::class,'home']);
 Route::get('/add_fooditems',[FoodItems::class,'add_fooditems_page']);
 Route::post('/add_new_food',[FoodItems::class,('add_fooditems_program')]);
@@ -63,12 +64,12 @@ Route::post('/edit_fooditems_program',[FoodItems::class,'edit_fooditems_program'
 Route::get('/delete_fooditems{del}',[FoodItems::class,'delete_fooditems']);
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:admin')->group(function () {
 Route::get('/orders',[Admin_Order::class,'home']);
 Route::get('/delete_orders{del}',[Admin_Order::class,'delete_order']);
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:admin')->group(function () {
 Route::get('/admin_booking',[Admin_Booking::class,'home']);
 Route::get('/edit_booking{ep}',[Admin_Booking::class,'edit_booking_page']);
 Route::post('/edit_booking_program',[Admin_Booking::class,'edit_booking_program']);
@@ -83,10 +84,19 @@ Route::post('/add-to-cart',[Order::class,'addToCart']);
 Route::post('/update-cart',[Order::class,'updateCart']);
 Route::post('/delete-cart-item',[Order::class,'deleteItem']);
 
+Route::middleware('auth:client')->group(function () {
 Route::post('/placeOrder',[PlaceOrder::class,'place_order_program']);
+});
 
 Route::get('/booking',[BookingController::class,'home']);
+Route::middleware('auth:client')->group(function () {
 Route::post('/add_booking',[BookingController::class,'add_booking']);
+});
 
+Route::get('/login_user',[Login_user::class,'login_view']);
+Route::post('/login_user_post', [Login_user::class, 'loginPost']);
+Route::get('/register_user',[Login_user::class,'register_view']);
+Route::post('/register_user_post',[Login_user::class,'registerPost']);
+Route::get('/logout_user',[Login_user::class,'logout']);
 
 

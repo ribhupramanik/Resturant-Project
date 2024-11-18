@@ -10,7 +10,11 @@
 </div>
 </div>
 <!-- Navbar & Hero End -->
-
+@if (Session::has('success'))
+        <div class="alert alert-success" role="alert">
+          {{ session('success') }}
+        </div>
+        @endif
 <!-- Menu Start -->
 <div class="container-xxl py-5">
     <div class="container">
