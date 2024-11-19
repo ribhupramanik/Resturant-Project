@@ -106,5 +106,6 @@ Route::post('/register_user_post',[Login_user::class,'registerPost']);
 Route::get('/logout_user',[Login_user::class,'logout']);
 
 Route::get('/contact',[Client_navbar_items::class,'contact_view']);
-
+Route::get('/services',[Client_navbar_items::class,'services_view']);
+Route::get('/about',[Client_navbar_items::class,'about_view']);
 
