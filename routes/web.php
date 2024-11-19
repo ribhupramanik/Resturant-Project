@@ -16,7 +16,8 @@ use App\Http\Controllers\Admin_Order;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Admin_Booking;
 use App\Http\Controllers\Login_user;
-
+use App\Http\Controllers\Customers;
+use App\Http\Controllers\Client_navbar_items;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,11 @@ Route::post('/add_tables',action:[Tables::class,('add_tables_form')]);
 Route::get('/edit_table{ep}',[Tables::class,('edit_tables_page')]);
 Route::post('/edit_tables_program',[Tables::class,('edit_tables_program')]);
 Route::get('/delete_table{del}',[Tables::class,('delete_table')]);
+});
+
+Route::middleware('auth:admin')->group(function () {
+Route::get('/admin_customers',[Customers::class,('view_customers')]);
+Route::get('/delete_user{del}',[Customers::class,('delete_user')]);
 });
 
 Route::middleware('auth:admin')->group(function () {
@@ -98,5 +104,7 @@ Route::post('/login_user_post', [Login_user::class, 'loginPost']);
 Route::get('/register_user',[Login_user::class,'register_view']);
 Route::post('/register_user_post',[Login_user::class,'registerPost']);
 Route::get('/logout_user',[Login_user::class,'logout']);
+
+Route::get('/contact',[Client_navbar_items::class,'contact_view']);
 
 

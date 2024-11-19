@@ -29,6 +29,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Bookings
                             </a>
+                            <a class="nav-link" href="{{url('/admin_customers')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user fa-fw"></i></div>
+                                Customers
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

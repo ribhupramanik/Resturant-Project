@@ -26,14 +26,14 @@
                         <a href="{{url('/menu')}}" class="nav-item nav-link">Menu</a>
                         <a href="{{url('/cart')}}" class="nav-item nav-link">Cart</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">User Info</a>
                             <div class="dropdown-menu m-0">
                                 <a href="{{url('/login_user')}}" class="dropdown-item">Login</a>
                                 <a href="{{url('/register_user')}}" class="dropdown-item">Register</a>
                                 <a href="{{url('/logout_user')}}" class="dropdown-item">Logout</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="{{url('/contact')}}" class="nav-item nav-link">Contact</a>
                     </div>
                     <a href="{{url('/booking')}}" class="btn btn-primary py-2 px-4">Book A Table</a>
                 </div>
