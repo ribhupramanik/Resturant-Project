@@ -92,6 +92,8 @@ Route::post('/delete-cart-item',[Order::class,'deleteItem']);
 
 Route::middleware('auth:client')->group(function () {
 Route::post('/placeOrder',[PlaceOrder::class,'place_order_program']);
+Route::post('/verify-payment', [PlaceOrder::class, 'verifyPayment']);
+
 });
 
 Route::get('/booking',[BookingController::class,'home']);

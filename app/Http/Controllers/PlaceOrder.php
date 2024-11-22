@@ -5,6 +5,7 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Razorpay\Api\Api;
 
 class PlaceOrder extends Controller
 {
@@ -28,4 +29,25 @@ class PlaceOrder extends Controller
         Cart::destroy();
         return response()->json(['success' => true]);
     }
+    
+
+public function verifyPayment(Request $request) {
+    $paymentId = $request->input('razorpay_payment_id');
+
+    try {
+        $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+        $payment = $api->payment->fetch($paymentId);
+
+        if ($payment->status == 'captured') {
+            // Place the order and return success
+            return response()->json(['success' => true]);
+        } 
+        // else {
+        //     return response()->json(['success' => false, 'error' => 'Payment failed.']);
+        // }
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'error' => $e->getMessage()]);
+    }
+}
+
 }
