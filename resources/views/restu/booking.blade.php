@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating date" id="date3" data-target-input="nearest">
-                                        <input type="date" class="form-control datetimepicker-input" id="time" placeholder="Date & Time" data-target="" data-toggle="datetimepicker" />
+                                        <input type="datetime-local" class="form-control datetimepicker-input" id="time" placeholder="Date & Time" data-target="" data-toggle="datetimepicker" />
                                         <label for="datetime">Date & Time</label>
                                     </div>
                                 </div>
