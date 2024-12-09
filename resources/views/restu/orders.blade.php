@@ -105,7 +105,8 @@
                                 <div><input type="text" id="total_price" name="total_price" class="form-control-plaintext text-end" value="Rs{{Cart::subtotal()}}"readonly></div>
                             </div>
                             <div class="pt-5">
-                               <button type="submit" id="submit" class="btn-dark btn btn-block w-100 submit">Place Order</button>
+                               <!-- <button type="submit" id="submit" class="btn-dark btn btn-block w-100 submit">Place Order</button> -->
+                               <button id="razorpay-button" class="btn-dark btn btn-block w-100 submit">Pay with Razorpay</button>
                             </div>
                         </div>
                     </div>     
@@ -206,7 +207,51 @@ function updatecart(rowId, qty) {
             });
         }
     }
-  $('.submit').click(function(e){
+    document.getElementById('razorpay-button').onclick = function(e) {
+        e.preventDefault();
+
+        let options = {
+            "key": "{{ env('RAZORPAY_KEY') }}", // Razorpay Key ID
+            "amount": "{{ Cart::subtotal() * 100 }}", // Total amount in paise
+            "currency": "INR",
+            "name": "Restaurant Name",
+            "description": "Order Payment",
+            "handler": function(response) {
+            $.post("{{ url('/verify-payment') }}", {
+             _token: "{{ csrf_token() }}",
+                razorpay_payment_id: response.razorpay_payment_id
+            }, function(data) {
+                if (data.success) {
+                    // Payment verification succeeded
+                    Swal.fire('Payment Successful', 'Your order is placed.', 'success')
+                        .then(() => {
+                            window.location.href = "{{ url('/') }}"; // Redirect on success
+                        });
+                } else if (data.error) {
+                    // Payment verification failed
+                    Swal.fire('Payment Failed', data.error || 'Verification failed.', 'error');
+                }
+            }).fail(function(xhr) {
+                // Handle request failure
+                Swal.fire('Error', 'Failed to verify payment. Please try again.', 'error');
+                console.error(xhr.responseText); // Log error for debugging
+            });
+        },
+
+
+            "prefill": {
+                "email": "{{ Auth::guard('client')->check() ? Auth::guard('client')->user()->email : '' }}",
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+
+        let rzp = new Razorpay(options);
+        rzp.open();   
+        };
+    
+    $('.submit').click(function(e){
     e.preventDefault();
     var names = $("input[name^='name']").map(function() {
         return $(this).val();
