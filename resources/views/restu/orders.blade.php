@@ -212,7 +212,7 @@ function updatecart(rowId, qty) {
 
         let options = {
             "key": "{{ env('RAZORPAY_KEY') }}", // Razorpay Key ID
-            "amount": "{{ Cart::subtotal() * 100 }}", // Total amount in paise
+            "amount": "{{Cart::subtotal() * 100 }}", // Total amount in paise
             "currency": "INR",
             "name": "Restaurant Name",
             "description": "Order Payment",
@@ -251,7 +251,7 @@ function updatecart(rowId, qty) {
         rzp.open();   
         };
     
-    $('.submit').click(function(e){
+        $('.submit').click(function(e){
     e.preventDefault();
     var names = $("input[name^='name']").map(function() {
         return $(this).val();

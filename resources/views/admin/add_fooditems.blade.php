@@ -7,10 +7,27 @@
     <form class="border" action="{{url('/add_new_food')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="px-4 form-group row">
-            <label for="catagory_name" class="col-sm-2 col-form-label">Enter Catagory Name</label>
+            <label for="catagory_name" class="col-sm-2 col-form-label">Select Catagory Name</label>
             <div class="col-sm-10">
-            <input type="text" name="catagory_name" placeholder="Enter Catagory Name" class="form-control">
+            <select name="catagory_name" class="form-select col-md-1">
+                @foreach ($allInfo->all() as $all)
+                    <option value="{{$all->CatagoryName}}">{{$all->CatagoryName}}</option>
+                @endforeach
+            </select>
             </div>
+        </div>
+        &nbsp;
+        <div class="px-4 form-group row">
+        <div class="px-4 form-group row">
+            <label for="catagory_id" class="col-sm-2 col-form-label">Select Catagory ID</label>
+            <div class="col-sm-10">
+            <select name="catagory_id" class="form-select col-md-1">
+                @foreach ($allInfo->all() as $all)
+                    <option value="{{$all->id}}">{{$all->id}}</option>
+                @endforeach
+            </select>
+            </div>
+        </div>
         </div>
         &nbsp;
         <div class="px-4 form-group row">
@@ -35,7 +52,7 @@
         <div class="px-4 form-group row">
             <label for="food_description" class="col-sm-2 col-form-label">Enter Food Description</label>
             <div class="col-sm-10">
-            <input type="text" name="food_description" placeholder="Enter Food Name" class="form-control">
+            <input type="text" name="food_description" placeholder="Enter Food Description" class="form-control">
             </div>
         </div>
         &nbsp;

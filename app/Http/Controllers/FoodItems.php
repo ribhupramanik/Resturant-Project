@@ -14,12 +14,14 @@ class FoodItems extends Controller
     }
 
     public function add_fooditems_page(){
-        return view('admin.add_fooditems');
+        $all_data = DB::table('catagories')->get();
+        return view('admin.add_fooditems')->with(['allInfo'=>$all_data]);
     }
 
     public function add_fooditems_program(Request $request)
     {
         $c_name = $request->input('catagory_name');
+        $c_id= $request->input('catagory_id');
         $f_name = $request->input('food_name');
         $price = $request->input('price');
         $quantity = $request->input('quantity');
@@ -31,6 +33,7 @@ class FoodItems extends Controller
         $file->move($uploadLocation,$fileName);
         $data=[
             'CatagoryName'      =>  $c_name,
+            'CatagoryId'        =>  $c_id,
             'FoodName'          =>  $f_name,
             'Price'             =>  $price,
             'Quantity'          =>  $quantity,
